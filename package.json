@@ -1,0 +1,42 @@
+{
+  "name": "affix-test",
+  "version": "1.0.0",
+  "description": "reproduce affix bug",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "rm -rf dist && webpack --config webpack.prod.js"
+  },
+  "author": "cathayandy",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-dva-hmr": "^0.4.1",
+    "babel-plugin-import": "^1.7.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "html-webpack-plugin": "^3.2.0",
+    "less": "^2.7.2",
+    "less-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^0.4.1",
+    "optimize-css-assets-webpack-plugin": "^4.0.3",
+    "redbox-react": "^1.6.0",
+    "style-loader": "^0.21.0",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.15.0",
+    "webpack-cli": "^3.0.8",
+    "webpack-merge": "^4.1.3"
+  },
+  "dependencies": {
+    "antd": "^3.5.4",
+    "dva": "^2.2.3",
+    "history": "^4.7.2",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0"
+  }
+}
