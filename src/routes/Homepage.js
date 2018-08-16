@@ -20,7 +20,7 @@ export default class Homepage extends PureComponent {
     }
     renderSections() {
         return sections.map(item => (
-            <div key={item} className="wrapper">
+            <div key={item} className="wrapper block">
                 <h1 id={item}>{ item }</h1>
             </div>
         ));
