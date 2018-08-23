@@ -2,55 +2,34 @@ const path = require('path');
 const merge = require('webpack-merge');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const CompressionPlugin = require('compression-webpack-plugin');
 const common = require('./webpack.common.js');
 
 module.exports = merge.smart(common, {
-    mode: 'production',
-    externals: {
-        moment: 'moment',
-        react: 'React',
-        dva: 'dva',
-        'dva/router': 'dva.router',
-        'dva/dynamic': 'dva.dynamic.default',
-        'react-dom': 'ReactDOM',
-    },
+    mode: 'development',
+    devtool: 'inline-source-map',
     plugins: [
-        new CompressionPlugin({
-            threshold: 10000,
-        }),
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: JSON.stringify('production'),
+                NODE_ENV: JSON.stringify('development'),
             },
         }),
         new HtmlWebpackPlugin({
             favicon: path.resolve('client', 'assets', 'favicon.ico'),
             filename: path.resolve(__dirname, 'dist', 'index.html'),
-            template: path.resolve(__dirname, 'client', 'index.prod.html'),
+            template: path.resolve(__dirname, 'client', 'index.dev.html'),
             inject: true,
             hash: false,
             minify: {
                 removeComments: false,
                 collapseWhitespace: false,
             },
-            chunks: [
-                'commons', 'index',
-            ],
+            chunks: ['index'],
         }),
-        new MiniCssExtractPlugin({
-            filename: '[name].[hash].css',
-            chunkFilename: '[id].[hash].css',
-        }),
+        new webpack.HotModuleReplacementPlugin(),
     ],
-    optimization: {
-        minimizer: [
-            new UglifyJsPlugin(),
-            new OptimizeCSSAssetsPlugin({}),
-        ],
+    devServer: {
+        contentBase: path.resolve(__dirname, 'dist'),
+        historyApiFallback: true,
     },
     module: {
         rules: [{
@@ -67,6 +46,7 @@ module.exports = merge.smart(common, {
                                 style: true,
                             },
                         ],
+                        'dva-hmr',
                         'transform-runtime',
                     ],
                 }, 
@@ -74,13 +54,13 @@ module.exports = merge.smart(common, {
         }, {
             test: /\.css$/,
             use: [
-                MiniCssExtractPlugin.loader,
+                'style-loader',
                 'css-loader',
             ],
         }, {
             test: /\.less$/,
             use: [
-                MiniCssExtractPlugin.loader,
+                'style-loader',
                 'css-loader',
                 'less-loader',
             ],

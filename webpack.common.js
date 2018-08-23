@@ -1,9 +1,16 @@
 const path = require('path');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
     entry: {
-        index: path.resolve(__dirname, 'src', 'index.js'),
+        index: path.resolve(__dirname, 'client', 'index.js'),
     },
+    plugins: [
+        new WorkboxPlugin.GenerateSW({
+            clientsClaim: true,
+            skipWaiting: true,
+        }),
+    ],
     output: {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
