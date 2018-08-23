@@ -6,6 +6,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 const common = require('./webpack.common.js');
 
 module.exports = merge.smart(common, {
@@ -40,6 +41,21 @@ module.exports = merge.smart(common, {
             chunks: [
                 'commons', 'index',
             ],
+        }),
+        new WebpackPwaManifest({
+            name: '🐰🐨',
+            short_name: '🐰🐨',
+            description: 'A service 💗 counter for 🐰 & 🐨.',
+            background_color: '#ffffff',
+            theme_color: '#1890ff',
+            icons: [{
+                src: path.resolve('client', 'assets', 'favicon-192x192.png'),
+                size: '192x192',
+            }],
+            ios: {
+                'apple-mobile-web-app-title': '🐰🐨',
+                'apple-mobile-web-app-status-bar-style': 'black-translucent',
+            }
         }),
         new MiniCssExtractPlugin({
             filename: '[name].[hash].css',
