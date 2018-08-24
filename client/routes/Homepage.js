@@ -135,7 +135,7 @@ export default class Homepage extends PureComponent {
                     </List.Item>
                 )}
                 pagination={{
-                    size: 'small', total: events.length, pageSize: 5,
+                    size: 'small', total: events.length + 1, pageSize: 5,
                 }}
             />
         );
