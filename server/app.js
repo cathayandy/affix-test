@@ -94,8 +94,8 @@ app.use(route.post('/api/events', async ctx => {
 app.use(route.del('/api/events', async ctx => {
     const { user, id } = ctx.request.body;
     if ((user in db) && id) {
-        const target = db[user].findIndex(event => event.time === id);
-        if (target) {
+        const target = db[user].findIndex(event => event.time === +id);
+        if (target >= 0) {
             db[user].splice(target, 1);
         }
         const res = await dump(user);
