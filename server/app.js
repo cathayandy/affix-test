@@ -82,7 +82,7 @@ app.use(route.get('/api/events', async ctx => {
 app.use(route.post('/api/events', async ctx => {
     const { user, title, count } = ctx.request.body;
     if ((user in db) && title && count) {
-        db[user].push({
+        db[user].unshift({
             title, count: +count, time: new Date().valueOf(),
         });
         const res = await dump(user);
