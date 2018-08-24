@@ -9,7 +9,7 @@ if ('serviceWorker' in navigator) {
             .then(registration => {
                 console.log('SW registered: ', registration);
             }).catch(err => {
-                console.err('SW registration failed: ', err);
+                console.error('SW registration failed: ', err);
             });
     });
 }
